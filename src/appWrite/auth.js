@@ -14,6 +14,7 @@ export class AuthService {
         this.account = new Account(this.client); //Account features (login/signup) ko activate kiya
     }
 
+    //user account creation
     async createAccount({ email, password, name }) {
         try {
             // Appwrite ka original code call kiya
@@ -21,7 +22,7 @@ export class AuthService {
 
             if (userAccount) {
                 // Account banne par dobara login page par bhejne ki bajaye, directly yahi se login method call karein.
-                //login method call
+                return this.login({email, password})
             } else {
                 return userAccount;     // Agar account null hai toh as it 7is return kar do
             }
@@ -32,7 +33,27 @@ export class AuthService {
         }
     }
 
-    
+    //login account
+    async login({ email, password }) {
+        try {
+            return await this.account.createEmailPasswordSession({ email, password });
+        } catch (error) {
+            console.log("Appwrite service, login: ",error);
+            throw error;
+        }
+    }
+
+    //
+    async getCurrentUser(){
+        try {
+            return this.account.get();
+        } catch (error) {
+            console.log("Appwrite service, current user: ", error);
+            throw error;
+        }
+        return null;
+    }
+
 }
 
 const authService = new AuthService();
