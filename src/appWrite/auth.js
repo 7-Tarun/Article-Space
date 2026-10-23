@@ -1,3 +1,5 @@
+//Appwrite Authentication Service. This can be used to other project also as it is if beckend service is used by app write.
+
 import conf from "../config/config";
 import { Client, Account, ID } from "appwrite";
 
