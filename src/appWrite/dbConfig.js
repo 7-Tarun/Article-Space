@@ -26,7 +26,12 @@ export class DBService{
     async createPost({title, slug, content, featuredImage, status, userID}){
         try {
             return await this.databases.createDocument(
-                conf.app
+                conf.appwriteDatabaseID,
+                conf.appwriteTableID,
+                slug,
+                {
+                    
+                }
             ) 
             
         } catch (error) {
