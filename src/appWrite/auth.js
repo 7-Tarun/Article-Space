@@ -70,3 +70,6 @@ export class AuthService {
 const authService = new AuthService();
 
 export default authService
+
+// export default class AuthService likhne ke bajaye export default new AuthService() likha hai.
+// Agar class export karte, toh frontend ke har component (Header, Login, Signup) me alag-alag new AuthService() likh kar naya object banana padta, jisse multiple backend connections open ho jate.
