@@ -63,6 +63,33 @@ export class DBService{
         }
     }
 
+    async deletePost(slug){
+        try {
+            await this.databases.delete(
+                conf.appwriteDatabaseID,
+                conf.appwriteTableID,
+                slug,
+            )
+            return true;
+        } catch (error) {
+            console.log("App Write Service: DeletePost: Error: ",error);
+            return false;
+        }
+    }
+
+    async getPost(slug){
+        try {
+            return await this.databases.get(
+                conf.appwriteDatabaseID,
+                conf.appwriteTableID,
+                slug,
+            )
+        } catch (error) {
+            console.log("App Write Service: GetPost: Error: ",error);
+            return false;
+        }
+    }
+
 }
 
 const dbService = new DBService();
