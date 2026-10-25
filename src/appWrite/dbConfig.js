@@ -102,6 +102,41 @@ export class DBService {
         }
     }
 
+    //file upload services  (recommended to apply this service in seperate file)
+
+    async uploadFile(file) {
+        try {
+            return await this.storage.createFile({
+                bucketId: conf.appwriteBucketID,
+                fileId: ID.unique(),
+                file: file,
+            });
+        } catch (error) {
+            console.log("App Write Service: uploadFile: Error: ", error);
+            return false;
+        }
+    }
+
+    async deleteFie(fileId) {
+        try {
+            await this.storage.deleteFile({
+                bucketId: conf.appwriteBucketID,
+                fileId: fileId,
+            });
+            return true;
+        } catch (error) {
+            console.log("App Write Serive: deleteFile: ", error);
+            return false;
+        }
+    }
+
+    getFilePreview(fileId) {
+        return this.storage.getFilePreview({
+            bucketId: conf.appwriteBucketID,
+            fileId: fileId,
+        })
+    }
+
 }
 
 const dbService = new DBService();
