@@ -8,8 +8,12 @@ function Button({
 
 }){
     return(
-        <button className={`px-4 py-2 rounded-lg ${bgColor} ${textColor} ${className}`} {...props}> </button>
+        <button className={`px-4 py-2 rounded-lg ${bgColor} ${textColor} ${className}`} {...props}>
+            {/* Children */}
+        </button>
     )
 }
 
 export default Button
+
+//Sign in ya other component ke button yaha children wali jagha aake render hoga
