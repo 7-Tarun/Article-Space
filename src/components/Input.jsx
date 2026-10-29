@@ -38,3 +38,7 @@ export default Input
 // through the custom Input component to the actual DOM input element.
 // This is useful for libraries like react-hook-form that need direct access
 // to input fields for form handling and submission.
+
+//Syntax Difference
+// Normal components receive (props), while forwardRef components receive (props, ref).
+// Pass the received ref to the actual DOM element using <input ref={ref} />.
