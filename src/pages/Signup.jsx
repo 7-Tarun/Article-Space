@@ -1,9 +1,9 @@
-import {Signup} from "./Index";
+import { Signup } from "./Index";
 
-function Signup(){
-    return(
+function Signup() {
+    return (
         <div className="py-8">
-            <Signup/>
+            <Signup />
         </div>
     )
 }
