@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from "react"
 import { useForm } from "react-hook-form"
-import { Button, Input, Select } from "./Index"
+import { Button, Input, Select, RTE } from "./Index"
 import dbService from "../appWrite/dbConfig"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 
-function PostForm(post) {
+function PostForm({post}) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {
             title: post?.title || "",
@@ -20,7 +20,7 @@ function PostForm(post) {
 
     const submit = async (data) => {
         if (post) {
-            const file = data.image[0] ? dbService.uploadFile(data.image[0]) : null
+            const file = await data.image[0] ? dbService.uploadFile(data.image[0]) : null
 
             if (file) {
                 dbService.deleteFile(post.featuredImage)
@@ -39,7 +39,7 @@ function PostForm(post) {
 
             if (file) {
                 const file = file.$id
-                data.featuredImage = fileId
+                data.featuredImage = file
                 const dbPost = await dbService.createPost({
                     ...data,
                     userID: userData.$id,
@@ -51,7 +51,7 @@ function PostForm(post) {
         }
     }
 
-    const slugTransform = useCallback((e) => {
+    const slugTransform = useCallback((value) => {
         if (value && typeof value === "string") {
             return value
                 .trim()
@@ -71,6 +71,7 @@ function PostForm(post) {
                 setValue("slug", slug)
             }
         })
+        return () => subscription.unsubscribe()
     },[watch, slugTransform, setValue])
 
     return (
@@ -104,7 +105,7 @@ function PostForm(post) {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview(post.featuredImage)}
+                            src={dbService.getFilePreview(post.featuredImage)}
                             alt={post.title}
                             className="rounded-lg"
                         />
