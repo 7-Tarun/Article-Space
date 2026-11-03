@@ -11,6 +11,7 @@ import Signup from "./Signup";
 import Login from "./Login";
 import PostForm from "./PostForm";
 import PostCard from "./PostCard";
+import Post from "../pages/Post"
 
 export {
     Header,
@@ -26,6 +27,7 @@ export {
     Login,
     PostForm,
     PostCard,
+    Post,
 }
 
 //Iss file ki help se hame sabhi components ko ak ak karke app.jsx me import karane ki jarurat nahi sirf yahi kafi hai.

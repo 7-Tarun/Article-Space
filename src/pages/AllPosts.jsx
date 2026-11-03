@@ -18,7 +18,7 @@ function AllPosts() {
             <div className="flex flex-wrap">
                 {posts.map((post) => (
                     <div key={post.$id} className="w-1/4 p-2">
-                        <PostCard {...post} />
+                        <PostCard {...post} />      {/*PostCard uses spread because it needs individual properties (e.g., $id, title).*/}
                     </div>
                 ))}
             </div>
