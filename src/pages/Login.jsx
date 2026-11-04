@@ -1,9 +1,9 @@
-import { Login } from "../components/Index";
+import { Login as LoginComponent} from "../components/Index";
 
 function Login() {
     return (
         <div className="py-8">
-            <Login />
+            <LoginComponent />
         </div>
     )
 }
