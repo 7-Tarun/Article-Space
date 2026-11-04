@@ -20,7 +20,7 @@ function Home(){
                 <Container>
                     <div className="flex flex-wrap">
                         <div className="py-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">Login to Read Posts</h1>
+                            <span className="text-2xl font-bold hover:text-gray-500 cursor-default">Login to Read Posts</span>
                         </div>
                     </div>
                 </Container>
