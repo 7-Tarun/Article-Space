@@ -23,7 +23,7 @@ export class DBService {
         this.storage = new Storage(this.client);
     }
 
-    async createPost({ title, slug, content, featuredImage, status, userID }) {
+    async createPost({ title, slug, content, featuredImage, status, userId }) {
         try {
             return await this.tablesDB.createRow({
                 databaseId: conf.appwriteDatabaseID,
@@ -34,7 +34,7 @@ export class DBService {
                     content,
                     featuredImage,
                     status,
-                    userID,
+                    userId,
                 },
             });
         } catch (error) {
@@ -117,7 +117,7 @@ export class DBService {
         }
     }
 
-    async deleteFie(fileId) {
+    async deleteFile(fileId) {
         try {
             await this.storage.deleteFile({
                 bucketId: conf.appwriteBucketID,

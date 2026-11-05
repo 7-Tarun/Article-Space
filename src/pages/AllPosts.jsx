@@ -1,19 +1,24 @@
 import { PostCard, Container } from "../components/Index"
 import dbService from "../appWrite/dbConfig"
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux";
 
 function AllPosts() {
 
     const [posts, setPosts] = useState([]);
+    const userData = useSelector(state => state.auth.userData);
 
     useEffect(() => {
-        dbService.getPost([]).then((posts) => {
-            console.log("Appwrite Response:", posts);
-            if (posts) {
-                setPosts(posts.rows);
-            }
-        })
-    }, [])
+        if (userData) {
+            dbService.getAllPosts([]).then((posts) => {
+                // console.log("Appwrite Response:", posts);
+                if (posts) {
+                    const userPosts =  posts.rows.filter(post => post.userId === userData.$id)
+                    setPosts(userPosts);
+                }
+            })
+        }
+    }, [userData])
 
     return (
         <div className="w-full py-8 ">
