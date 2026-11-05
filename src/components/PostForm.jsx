@@ -5,11 +5,11 @@ import dbService from "../appWrite/dbConfig"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 
-function PostForm({post}) {
+function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {
             title: post?.title || "",
-            slug: post?.slug || "",
+            slug: post?.$id || "",
             content: post?.content || "",
             status: post?.status || "active",
         },
@@ -20,7 +20,7 @@ function PostForm({post}) {
 
     const submit = async (data) => {
         if (post) {
-            const file = await data.image[0] ? dbService.uploadFile(data.image[0]) : null
+            const file = data.image[0] ? await dbService.uploadFile(data.image[0]) : null;
 
             if (file) {
                 dbService.deleteFile(post.featuredImage)
@@ -58,20 +58,20 @@ function PostForm({post}) {
                 .replace(/[^a-zA-Z\d\s]+/g, "-")
                 .replace(/\s/g, "-")
         }
-        else{
+        else {
             return ""
         }
-    })
+    }, [])
 
     useEffect(() => {
-        const subscription = watch((value, {name}) => {
+        const subscription = watch((value, { name }) => {
             if (name === "title") {
-                const slug = slugTransform(value.title,{shouldValidate: true})
-                setValue("slug", slug)
+                const slug = slugTransform(value.title)
+                setValue("slug", slug, { shouldValidate: true })
             }
         })
         return () => subscription.unsubscribe()
-    },[watch, slugTransform, setValue])
+    }, [watch, slugTransform, setValue])
 
     return (
         <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">

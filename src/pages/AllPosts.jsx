@@ -2,6 +2,7 @@ import { PostCard, Container } from "../components/Index"
 import dbService from "../appWrite/dbConfig"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux";
+import { Query } from "appwrite";
 
 function AllPosts() {
 
