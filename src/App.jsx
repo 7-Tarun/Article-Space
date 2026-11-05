@@ -28,17 +28,17 @@ function App() {
 
 
   return !loading ? (
-    <div className="min-h-screen flex flex-wrap content-between bg-gray-400">
-      <div className="w-full block">
-        <Header/>
-        <main>
-          <Outlet/>
-        </main>
-        <Footer/>
-      </div>
+    <div className="min-h-screen flex flex-col bg-stone-50 text-stone-900">
+      <Header/>
+      <main className="flex-1">
+        <Outlet/>
+      </main>
+      <Footer/>
     </div>
   ) : (
-    <div>Loading...</div>
+    <div className="flex items-center justify-center min-h-screen bg-stone-50">
+      <div className="w-7 h-7 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+    </div>
   )
 
 }

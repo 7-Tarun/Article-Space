@@ -22,16 +22,40 @@ function AllPosts() {
     }, [userData])
 
     return (
-        <div className="w-full py-8 ">
-            <Container>
-                <div className="flex flex-wrap">
-                    {posts.map((post) => (
-                        <div key={post.$id} className="w-1/4 p-2">
-                            <PostCard {...post} />      {/*PostCard uses spread because it needs individual properties (e.g., $id, title).*/}
+        <div className="w-full">
+            {/* Page header */}
+            <div className="border-b border-stone-100 bg-white">
+                <Container>
+                    <div className="py-8 animate-fade-up">
+                        <h1 className="font-serif text-2xl font-bold text-stone-900">My Posts</h1>
+                        <p className="text-stone-500 text-sm mt-1">
+                            {posts.length > 0
+                                ? `${posts.length} article${posts.length !== 1 ? 's' : ''} written by you`
+                                : "Nothing published yet"}
+                        </p>
+                    </div>
+                </Container>
+            </div>
+
+            <div className="py-10">
+                <Container>
+                    {posts.length === 0 ? (
+                        <div className="flex flex-col items-center justify-center py-24 text-center animate-fade-up">
+                            <div className="inline-flex items-center justify-center w-14 h-14 bg-indigo-100 rounded-2xl mb-5 text-2xl">
+                                ✍️
+                            </div>
+                            <h2 className="font-serif text-xl font-semibold text-stone-800">No posts yet</h2>
+                            <p className="text-stone-500 mt-2 text-sm">Write your first article and it will appear here.</p>
                         </div>
-                    ))}
-                </div>
-            </Container>
+                    ) : (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 stagger-children">
+                            {posts.map((post) => (
+                                <PostCard key={post.$id} {...post} />
+                            ))}
+                        </div>
+                    )}
+                </Container>
+            </div>
         </div>
     )
 }

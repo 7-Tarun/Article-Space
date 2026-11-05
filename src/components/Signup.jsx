@@ -31,35 +31,43 @@ function Signup() {
 
     return (
         <div className="flex items-center justify-center">
-            <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border Oborder-black/10`}>
-                <div className="mb-2 flex justify-center">
-                    <span className="inline-block w-full max-w-[100px]">
+            <div className="mx-auto w-full max-w-md bg-white border border-stone-200/80 rounded-2xl p-8
+                shadow-sm hover:shadow-lg transition-shadow duration-300 animate-fade-up">
+                <div className="mb-6 flex justify-center">
+                    <span className="inline-block">
                         <Logo width="100%" />
                     </span>
                 </div>
-                <h2 className="text-center text-2xl font-bold leading-tight">Sign Up to Create Account</h2>
-                <p className="mt-2 text-center text-base text-black/60">
-                    Already have an Account?&nbsp;
+                <h2 className="text-center text-2xl font-serif font-bold text-stone-900 leading-tight">Create account</h2>
+                <p className="mt-2 text-center text-sm text-stone-500">
+                    Already have an account?&nbsp;
                     <Link to="/login"
-                        className="font-medium text-primary transition-all duration-200 hover: underline">
+                        className="font-semibold text-indigo-600 hover:text-indigo-700 underline underline-offset-2 transition-colors duration-150">
                         Sign In
                     </Link>
                 </p>
-                {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+                {error && (
+                    <div className="mt-5 flex items-start gap-2.5 text-red-700 text-sm bg-red-50 border border-red-200 rounded-xl py-3 px-4 animate-fade-in">
+                        <svg className="w-4 h-4 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                        </svg>
+                        <span>{error}</span>
+                    </div>
+                )}
 
-                <form onSubmit={handleSubmit(signup)}>
+                <form onSubmit={handleSubmit(signup)} className="mt-7">
                     <div className="space-y-5">
                         <Input
-                            label="Full Name: "
-                            placeholder="Enter your Full Name"
+                            label="Full Name"
+                            placeholder="Enter your full name"
                             {...register("name", {
                                 required: true,
 
                             })}
                         />
                         <Input
-                            label="Email: "
-                            placeholder="Enter Your Email"
+                            label="Email"
+                            placeholder="Enter your email"
                             type="email"
                             //register ko spread karna jaruri hai or ak key dani hogi yaha pe email hai (optional: object pass kar sakte hai)
                             {...register("email", {
@@ -71,19 +79,19 @@ function Signup() {
                         />
 
                         <Input
-                        label="Password: "
-                        type="password"
-                        placeholder="Enter Your Password"
-                        {...register("password",{
-                            required: true,
-                        })}
+                            label="Password"
+                            type="password"
+                            placeholder="Enter your password"
+                            {...register("password",{
+                                required: true,
+                            })}
                         />
 
                         <Button
-                        type="submit"
-                        className="w-full"
+                            type="submit"
+                            className="w-full mt-2 py-3 text-base"
                         >
-                            Create Account
+                            Create Account →
                         </Button>
                     </div>
                 </form>

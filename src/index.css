@@ -1,1 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
 @import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lora', Georgia, serif;
+  }
+  * {
+    box-sizing: border-box;
+    scrollbar-width: none;
+  }
+}
+
+/* ── Page fade-in animation ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-fade-in {
+  animation: fadeIn 0.3s ease both;
+}
+
+/* Staggered children delay helpers */
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.10s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.20s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.30s; }
+.stagger-children > *:nth-child(n+7) { animation-delay: 0.35s; }
+
+/* ── Skeleton shimmer for image placeholder ── */
+.skeleton {
+  background: linear-gradient(90deg, #f0ede8 25%, #e8e4de 50%, #f0ede8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+/* ── Nav active indicator underline ── */
+.nav-btn {
+  position: relative;
+}
+.nav-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  right: 50%;
+  height: 2px;
+  background: #4f46e5;
+  border-radius: 1px;
+  transition: left 0.2s ease, right 0.2s ease;
+}
+.nav-btn:hover::after {
+  left: 12px;
+  right: 12px;
+}
+
+/* ── Smooth input label lift ── */
+.input-group { position: relative; }
+
+/* ── Card lift on hover ── */
+.card-hover {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px -6px rgba(79, 70, 229, 0.12), 0 4px 10px -3px rgba(0,0,0,0.08);
+}
+
+/* ── Button press effect ── */
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* ── Prose styles for parsed post HTML ── */
+.browser-css { line-height: 1.85; color: #1c1917; }
+.browser-css h1 { font-family: 'Lora', Georgia, serif; font-size: 1.75rem; font-weight: 700; margin: 2rem 0 0.75rem; color: #0c0a09; }
+.browser-css h2 { font-family: 'Lora', Georgia, serif; font-size: 1.4rem; font-weight: 600; margin: 1.75rem 0 0.5rem; color: #0c0a09; }
+.browser-css h3 { font-family: 'Lora', Georgia, serif; font-size: 1.15rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: #0c0a09; }
+.browser-css h4 { font-family: 'Lora', Georgia, serif; font-size: 1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: #0c0a09; }
+.browser-css h5 { font-family: 'Lora', Georgia, serif; font-size: 0.925rem; font-weight: 600; margin: 1rem 0 0.5rem; color: #0c0a09; }
+.browser-css h6 { font-family: 'Lora', Georgia, serif; font-size: 0.85rem; font-weight: 600; margin: 1rem 0 0.5rem; color: #0c0a09; }
+.browser-css p  { margin: 1rem 0; line-height: 1.9; }
+.browser-css a  { color: #4f46e5; text-decoration: underline; text-underline-offset: 3px; transition: color 0.15s; }
+.browser-css a:hover { color: #3730a3; }
+.browser-css ul { list-style: disc; padding-left: 1.6rem; margin: 0.85rem 0; }
+.browser-css ol { list-style: decimal; padding-left: 1.6rem; margin: 0.85rem 0; }
+.browser-css li { margin: 0.35rem 0; line-height: 1.75; }
+.browser-css blockquote {
+  border-left: 3px solid #4f46e5;
+  padding: 0.75rem 0 0.75rem 1.25rem;
+  color: #57534e; font-style: italic;
+  margin: 1.5rem 0;
+  background: #f9f7fe;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+.browser-css img { border-radius: 0.75rem; max-width: 100%; margin: 1.5rem 0; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.browser-css pre { background: #1e1e2e; color: #cdd6f4; border-radius: 0.75rem; padding: 1.25rem; overflow-x: auto; font-size: 0.875rem; margin: 1.25rem 0; }
+.browser-css code { background: #f0edf9; color: #4f46e5; padding: 0.1rem 0.4rem; border-radius: 0.25rem; font-size: 0.875em; }
+.browser-css pre code { background: none; color: inherit; padding: 0; }
+.browser-css hr { border: none; border-top: 1px solid #e7e5e4; margin: 2.5rem 0; }
+.browser-css table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.925rem; }
+.browser-css th { background: #f5f3ff; color: #3730a3; font-weight: 600; padding: 0.6rem 0.9rem; text-align: left; border-bottom: 2px solid #e0e7ff; }
+.browser-css td { padding: 0.6rem 0.9rem; border-bottom: 1px solid #f0ede8; }
