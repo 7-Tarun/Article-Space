@@ -20,7 +20,12 @@ export class AuthService {
     async createAccount({ email, password, name }) {
         try {
             // Appwrite ka original code call kiya
-            const userAccount = await this.account.create(ID.unique(), email, password, name);
+            const userAccount = await this.account.create({
+                userId: ID.unique(),
+                email,
+                password,
+                name,
+            });
 
             if (userAccount) {
                 // Account banne par dobara login page par bhejne ki bajaye, directly yahi se login method call karein.
