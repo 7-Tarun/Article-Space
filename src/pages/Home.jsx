@@ -1,18 +1,41 @@
 import { useEffect, useState } from "react"
 import dbService from "../appWrite/dbConfig"
-import { Container, PostCard } from "../components/Index"
+import { Container, PostCard, PostCardSkeleton } from "../components/Index"
 
 function Home() {
 
     const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        dbService.getAllPosts().then((posts) => {
-            if (posts) {
-                setPosts(posts.rows)
-            }
-        })
+        dbService.getAllPosts()
+            .then((posts) => {
+                if (posts) {
+                    setPosts(posts.rows)
+                }
+            })
+            .finally(() => setLoading(false))
     }, [])
+
+    if (loading) {
+        return (
+            <div className="w-full">
+                <div className="border-b border-stone-100 bg-white">
+                    <Container>
+                        <div className="py-8 animate-pulse">
+                            <div className="h-7 bg-stone-200/80 rounded-md w-44 skeleton mb-2" />
+                            <div className="h-4 bg-stone-100 rounded w-28 skeleton" />
+                        </div>
+                    </Container>
+                </div>
+                <div className="py-10">
+                    <Container>
+                        <PostCardSkeleton count={8} />
+                    </Container>
+                </div>
+            </div>
+        )
+    }
 
     if (posts.length === 0) {
         return (

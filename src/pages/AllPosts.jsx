@@ -1,4 +1,4 @@
-import { PostCard, Container } from "../components/Index"
+import { PostCard, Container, PostCardSkeleton } from "../components/Index"
 import dbService from "../appWrite/dbConfig"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux";
@@ -7,17 +7,20 @@ import { Query } from "appwrite";
 function AllPosts() {
 
     const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
     const userData = useSelector(state => state.auth.userData);
 
     useEffect(() => {
         if (userData) {
-            dbService.getAllPosts([]).then((posts) => {
-                // console.log("Appwrite Response:", posts);
-                if (posts) {
-                    const userPosts =  posts.rows.filter(post => post.userId === userData.$id)
-                    setPosts(userPosts);
-                }
-            })
+            dbService.getAllPosts([])
+                .then((posts) => {
+                    // console.log("Appwrite Response:", posts);
+                    if (posts) {
+                        const userPosts =  posts.rows.filter(post => post.userId === userData.$id)
+                        setPosts(userPosts);
+                    }
+                })
+                .finally(() => setLoading(false))
         }
     }, [userData])
 
@@ -29,7 +32,9 @@ function AllPosts() {
                     <div className="py-8 animate-fade-up">
                         <h1 className="font-serif text-2xl font-bold text-stone-900">My Posts</h1>
                         <p className="text-stone-500 text-sm mt-1">
-                            {posts.length > 0
+                            {loading
+                                ? "Loading your articles..."
+                                : posts.length > 0
                                 ? `${posts.length} article${posts.length !== 1 ? 's' : ''} written by you`
                                 : "Nothing published yet"}
                         </p>
@@ -39,7 +44,9 @@ function AllPosts() {
 
             <div className="py-10">
                 <Container>
-                    {posts.length === 0 ? (
+                    {loading ? (
+                        <PostCardSkeleton count={4} />
+                    ) : posts.length === 0 ? (
                         <div className="flex flex-col items-center justify-center py-24 text-center animate-fade-up">
                             <div className="inline-flex items-center justify-center w-14 h-14 bg-indigo-100 rounded-2xl mb-5 text-2xl">
                                 ✍️
