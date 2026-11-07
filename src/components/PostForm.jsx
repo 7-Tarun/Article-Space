@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 function PostForm({ post }) {
-    const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
+    const { register, handleSubmit, watch, setValue, control, getValues, formState: { isSubmitting } } = useForm({
         defaultValues: {
             title: post?.title || "",
             slug: post?.$id || "",
@@ -119,6 +119,8 @@ function PostForm({ post }) {
                     />
                     <Button
                         type="submit"
+                        loading={isSubmitting}
+                        loadingText={post ? "Updating..." : "Publishing..."}
                         bgColor={post ? "bg-emerald-600 hover:bg-emerald-700" : "bg-indigo-600 hover:bg-indigo-700"}
                         className="w-full py-3 text-sm"
                     >

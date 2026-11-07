@@ -13,6 +13,8 @@ import PostForm from "./PostForm";
 import PostCard from "./PostCard";
 import Post from "../pages/Post";
 import AuthLayout from "./AuthLayout";
+import Loader from "./Loader";
+import PostCardSkeleton from "./PostCardSkeleton";
 
 export {
     Header,
@@ -30,6 +32,8 @@ export {
     PostCard,
     Post,
     AuthLayout,
+    Loader,
+    PostCardSkeleton,
 }
 
 //Iss file ki help se hame sabhi components ko ak ak karke app.jsx me import karane ki jarurat nahi sirf yahi kafi hai.

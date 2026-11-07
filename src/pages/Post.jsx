@@ -63,8 +63,8 @@ export default function Post() {
                         {isAuthor && (
                             <div className="absolute top-4 right-4 flex gap-2">
                                 <Link to={`/edit-post/${post.$id}`}>
-                                    <Button bgColor="bg-white/90 hover:bg-white text-stone-700 border border-stone-200 hover:border-stone-300 backdrop-blur-sm">
-                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <Button textColor="text-black" bgColor="bg-white/90 hover:bg-white text-stone-700 border border-stone-200 hover:border-stone-300 backdrop-blur-sm">
+                                        <svg className="text-black w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
                                         Edit

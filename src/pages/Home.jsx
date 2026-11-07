@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react"
 import dbService from "../appWrite/dbConfig"
-import {Container,PostCard } from "../components/Index"
+import { Container, PostCard } from "../components/Index"
 
-function Home(){
+function Home() {
 
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         dbService.getAllPosts().then((posts) => {
-            if(posts){
+            if (posts) {
                 setPosts(posts.rows)
             }
         })
-    },[])
+    }, [])
 
-    if(posts.length === 0){
+    if (posts.length === 0) {
         return (
             <div className="w-full">
                 {/* Hero empty state */}
@@ -53,7 +53,7 @@ function Home(){
                 <Container>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 stagger-children">
                         {posts.map((post) => (
-                            <PostCard key={post.$id} {...post}/>
+                            <PostCard key={post.$id} {...post} />
                         ))}
                     </div>
                 </Container>
