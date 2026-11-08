@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 import dbService from "../appWrite/dbConfig"
 import { Container, PostCard, PostCardSkeleton } from "../components/Index"
 
@@ -6,16 +7,23 @@ function Home() {
 
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const authStatus = useSelector((state) => state.auth.status);
 
     useEffect(() => {
-        dbService.getAllPosts()
-            .then((posts) => {
-                if (posts) {
-                    setPosts(posts.rows)
-                }
-            })
-            .finally(() => setLoading(false))
-    }, [])
+        if (authStatus) {
+            setLoading(true);
+            dbService.getAllPosts()
+                .then((posts) => {
+                    if (posts) {
+                        setPosts(posts.rows)
+                    }
+                })
+                .finally(() => setLoading(false))
+        } else {
+            setPosts([]);
+            setLoading(false);
+        }
+    }, [authStatus])
 
     if (loading) {
         return (
@@ -37,7 +45,7 @@ function Home() {
         )
     }
 
-    if (posts.length === 0) {
+    if (!authStatus) {
         return (
             <div className="w-full">
                 {/* Hero empty state */}
@@ -51,6 +59,27 @@ function Home() {
                             <h1 className="font-serif text-3xl font-bold text-stone-900 mb-3">Your reading space</h1>
                             <p className="text-stone-500 text-base max-w-sm leading-relaxed">
                                 Log in to discover articles, or start writing your first post for the world to read.
+                            </p>
+                        </div>
+                    </Container>
+                </div>
+            </div>
+        )
+    }
+
+    if (posts.length === 0) {
+        return (
+            <div className="w-full">
+                <div className="relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-stone-50 border-b border-stone-100">
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_50%,rgba(99,102,241,0.08),transparent_70%)]" />
+                    <Container>
+                        <div className="relative flex flex-col items-center justify-center py-32 text-center animate-fade-up">
+                            <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-2xl mb-6 text-3xl">
+                                ✍️
+                            </div>
+                            <h1 className="font-serif text-3xl font-bold text-stone-900 mb-3">No articles published yet</h1>
+                            <p className="text-stone-500 text-base max-w-sm leading-relaxed">
+                                Be the first writer to publish an article for everyone to read!
                             </p>
                         </div>
                     </Container>

@@ -15,6 +15,7 @@ import Post from "../pages/Post";
 import AuthLayout from "./AuthLayout";
 import Loader from "./Loader";
 import PostCardSkeleton from "./PostCardSkeleton";
+import ConfirmModal from "./ConfirmModal";
 
 export {
     Header,
@@ -34,6 +35,7 @@ export {
     AuthLayout,
     Loader,
     PostCardSkeleton,
+    ConfirmModal,
 }
 
 //Iss file ki help se hame sabhi components ko ak ak karke app.jsx me import karane ki jarurat nahi sirf yahi kafi hai.

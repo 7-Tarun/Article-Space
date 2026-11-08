@@ -55,7 +55,10 @@ export class AuthService {
         try {
             return await this.account.get();
         } catch (error) {
-            console.log("Appwrite service, current user: ", error);
+            // Error 401 is normal when guest user is not logged in
+            if (error?.code !== 401) {
+                console.log("Appwrite service, current user: ", error);
+            }
         }
         return null;
     }
