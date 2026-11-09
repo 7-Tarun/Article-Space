@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { Button, Input, Select, RTE } from "./Index"
 import dbService from "../appWrite/dbConfig"
@@ -14,6 +14,26 @@ function PostForm({ post }) {
             status: post?.status || "active",
         },
     })
+
+    const [imagePreview, setImagePreview] = useState( post ?.featuredImage ? dbService.getFilePreview(post.featuredImage) : null )
+
+    // React Hook Form se image input ki live value ko watch karna
+    const selectedImage = watch("image")
+
+    useEffect(() => {
+        if(selectedImage && selectedImage.length > 0 && selectedImage[0] instanceof File) {
+            const objectUrl = URL.createObjectURL(selectedImage[0])
+            setImagePreview(objectUrl)
+            
+            return () => URL.revokeObjectURL(objectUrl)
+        }
+        else if(post?.featuredImage){
+            setImagePreview(dbService.getFilePreview(post.featuredImage))
+        }
+        else{
+            setImagePreview(null)
+        }
+    }, [selectedImage, post])
 
     const navigate = useNavigate();
     const userData = useSelector(state => state.auth.userData)
@@ -103,13 +123,24 @@ function PostForm({ post }) {
                         accept="image/png, image/jpg, image/jpeg, image/gif"
                         {...register("image", { required: !post })}
                     />
-                    {post && (
-                        <div className="w-full overflow-hidden rounded-xl border border-stone-100">
-                            <img
-                                src={dbService.getFilePreview(post.featuredImage)}
-                                alt={post.title}
-                                className="w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
-                            />
+                    {imagePreview && (
+                        <div className="space-y-1.5">
+                            <div className="flex items-center justify-between text-xs text-stone-500 font-medium">
+                                <span>Card Preview</span>
+                                <span className="text-[11px] text-stone-400">16:9 ratio</span>
+                            </div>
+                            <div className="w-full aspect-video overflow-hidden rounded-xl border border-stone-200/80 bg-stone-100 relative shadow-sm group">
+                                <img
+                                    src={imagePreview}
+                                    alt={post?.title || "Featured Image Preview"}
+                                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                                />
+                                {selectedImage?.[0] instanceof File && (
+                                    <span className="absolute bottom-2 left-2 text-[10px] font-medium bg-emerald-600/90 text-white px-2 py-0.5 rounded shadow-sm backdrop-blur-sm">
+                                        New Selection
+                                    </span>
+                                )}
+                            </div>
                         </div>
                     )}
                     <Select

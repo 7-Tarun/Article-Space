@@ -110,6 +110,7 @@ export default function Post() {
     ) : null;
 }
 
+// getFilePreview
 
 //Whats the problem of using parse?
 // Stored XSS (Cross-Site Scripting):
