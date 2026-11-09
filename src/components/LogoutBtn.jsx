@@ -6,7 +6,7 @@ import { useState } from "react"
 import { ConfirmModal } from "./Index"
 
 
-function LogoutBtn() {
+function LogoutBtn({ className = "" }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -25,10 +25,12 @@ function LogoutBtn() {
             .finally(() => setLoading(false))
     }
 
+    const defaultClass = "text-sm font-medium text-stone-500 hover:text-red-600 transition-all duration-200 px-3.5 py-2 rounded-lg hover:bg-red-50/70 cursor-pointer btn-press"
+
     return (
         <>
             <button
-                className="text-sm font-medium text-stone-500 hover:text-red-600 transition-all duration-200 px-3.5 py-2 rounded-lg hover:bg-red-50/70 cursor-pointer btn-press"
+                className={className ? className : defaultClass}
                 onClick={() => setShowModel(true)}
             >
                 Logout

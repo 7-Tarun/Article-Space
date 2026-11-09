@@ -40,7 +40,7 @@ function ConfirmModal({
             }}>
 
             {/* LAYER 2: White Card */}
-            <div className="bg-white border border-stone-200/80 rounded-2xl p-6 max-w-sm w-full shadow-xl animate-fade-up">
+            <div className="bg-white border border-stone-200/80 rounded-xl sm:rounded-2xl p-5 sm:p-6 max-w-sm w-full shadow-xl animate-fade-up">
 
                 <div className="flex items-start gap-3.5 mb-3">
 
@@ -51,7 +51,7 @@ function ConfirmModal({
                     </div>
 
                     <div>
-                        <h3 className="font-serif font-bold text-lg text-stone-900 leading-snug">
+                        <h3 className="font-serif font-bold text-base sm:text-lg text-stone-900 leading-snug">
                             {title}
                         </h3>
                         <p className="text-sm text-stone-500 mt-1 leading-relaxed">
@@ -61,7 +61,7 @@ function ConfirmModal({
                 </div>
 
                 {/* Buttons (Cancel & Confirm) */}
-                <div className="flex items-center justify-end gap-2.5 mt-6">
+                <div className="flex items-center justify-end gap-2 sm:gap-2.5 mt-5 sm:mt-6">
                     {/* Normal Cancel Button */}
                     <button
                         type="button"

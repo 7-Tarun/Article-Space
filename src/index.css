@@ -92,18 +92,27 @@
 }
 
 /* ── Prose styles for parsed post HTML ── */
-.browser-css { line-height: 1.85; color: #1c1917; }
-.browser-css h1 { font-family: 'Lora', Georgia, serif; font-size: 1.75rem; font-weight: 700; margin: 2rem 0 0.75rem; color: #0c0a09; }
-.browser-css h2 { font-family: 'Lora', Georgia, serif; font-size: 1.4rem; font-weight: 600; margin: 1.75rem 0 0.5rem; color: #0c0a09; }
-.browser-css h3 { font-family: 'Lora', Georgia, serif; font-size: 1.15rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: #0c0a09; }
+.browser-css { line-height: 1.85; color: #1c1917; word-break: break-word; }
+.browser-css h1 { font-family: 'Lora', Georgia, serif; font-size: 1.45rem; font-weight: 700; margin: 1.75rem 0 0.75rem; color: #0c0a09; }
+@media (min-width: 640px) {
+  .browser-css h1 { font-size: 1.75rem; margin: 2rem 0 0.75rem; }
+}
+.browser-css h2 { font-family: 'Lora', Georgia, serif; font-size: 1.25rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: #0c0a09; }
+@media (min-width: 640px) {
+  .browser-css h2 { font-size: 1.4rem; margin: 1.75rem 0 0.5rem; }
+}
+.browser-css h3 { font-family: 'Lora', Georgia, serif; font-size: 1.1rem; font-weight: 600; margin: 1.35rem 0 0.5rem; color: #0c0a09; }
+@media (min-width: 640px) {
+  .browser-css h3 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
+}
 .browser-css h4 { font-family: 'Lora', Georgia, serif; font-size: 1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: #0c0a09; }
 .browser-css h5 { font-family: 'Lora', Georgia, serif; font-size: 0.925rem; font-weight: 600; margin: 1rem 0 0.5rem; color: #0c0a09; }
 .browser-css h6 { font-family: 'Lora', Georgia, serif; font-size: 0.85rem; font-weight: 600; margin: 1rem 0 0.5rem; color: #0c0a09; }
 .browser-css p  { margin: 1rem 0; line-height: 1.9; }
 .browser-css a  { color: #4f46e5; text-decoration: underline; text-underline-offset: 3px; transition: color 0.15s; }
 .browser-css a:hover { color: #3730a3; }
-.browser-css ul { list-style: disc; padding-left: 1.6rem; margin: 0.85rem 0; }
-.browser-css ol { list-style: decimal; padding-left: 1.6rem; margin: 0.85rem 0; }
+.browser-css ul { list-style: disc; padding-left: 1.4rem; margin: 0.85rem 0; }
+.browser-css ol { list-style: decimal; padding-left: 1.4rem; margin: 0.85rem 0; }
 .browser-css li { margin: 0.35rem 0; line-height: 1.75; }
 .browser-css blockquote {
   border-left: 3px solid #4f46e5;
@@ -113,11 +122,14 @@
   background: #f9f7fe;
   border-radius: 0 0.5rem 0.5rem 0;
 }
-.browser-css img { border-radius: 0.75rem; max-width: 100%; margin: 1.5rem 0; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-.browser-css pre { background: #1e1e2e; color: #cdd6f4; border-radius: 0.75rem; padding: 1.25rem; overflow-x: auto; font-size: 0.875rem; margin: 1.25rem 0; }
-.browser-css code { background: #f0edf9; color: #4f46e5; padding: 0.1rem 0.4rem; border-radius: 0.25rem; font-size: 0.875em; }
-.browser-css pre code { background: none; color: inherit; padding: 0; }
+.browser-css img { border-radius: 0.75rem; max-width: 100%; height: auto; margin: 1.5rem 0; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.browser-css pre { background: #1e1e2e; color: #cdd6f4; border-radius: 0.75rem; padding: 1rem; overflow-x: auto; font-size: 0.8125rem; margin: 1.25rem 0; -webkit-overflow-scrolling: touch; }
+@media (min-width: 640px) {
+  .browser-css pre { padding: 1.25rem; font-size: 0.875rem; }
+}
+.browser-css code { background: #f0edf9; color: #4f46e5; padding: 0.1rem 0.4rem; border-radius: 0.25rem; font-size: 0.875em; word-break: break-all; }
+.browser-css pre code { background: none; color: inherit; padding: 0; word-break: normal; }
 .browser-css hr { border: none; border-top: 1px solid #e7e5e4; margin: 2.5rem 0; }
-.browser-css table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.925rem; }
-.browser-css th { background: #f5f3ff; color: #3730a3; font-weight: 600; padding: 0.6rem 0.9rem; text-align: left; border-bottom: 2px solid #e0e7ff; }
+.browser-css table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.875rem; display: block; overflow-x: auto; }
+.browser-css th { background: #f5f3ff; color: #3730a3; font-weight: 600; padding: 0.6rem 0.9rem; text-align: left; border-bottom: 2px solid #e0e7ff; white-space: nowrap; }
 .browser-css td { padding: 0.6rem 0.9rem; border-bottom: 1px solid #f0ede8; }

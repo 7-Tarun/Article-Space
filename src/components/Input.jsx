@@ -20,7 +20,7 @@ const Input = React.forwardRef(function Input({
             }
             <input
             type={type}
-            className={`w-full px-4 py-2.5 text-sm text-stone-900 bg-white
+            className={`w-full px-4 py-2.5 text-base sm:text-sm text-stone-900 bg-white
                 border border-stone-200 rounded-lg outline-none
                 hover:border-stone-300
                 focus:border-indigo-400 focus:ring-3 focus:ring-indigo-100

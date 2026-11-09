@@ -30,8 +30,8 @@ function Signup() {
     }
 
     return (
-        <div className="flex items-center justify-center">
-            <div className="mx-auto w-full max-w-md bg-white border border-stone-200/80 rounded-2xl p-8
+        <div className="flex items-center justify-center px-4 py-6 sm:py-10">
+            <div className="mx-auto w-full max-w-md bg-white border border-stone-200/80 rounded-xl sm:rounded-2xl p-5 sm:p-8
                 shadow-sm hover:shadow-lg transition-shadow duration-300 animate-fade-up">
                 <div className="mb-6 flex justify-center">
                     <span className="inline-block">

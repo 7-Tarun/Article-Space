@@ -94,7 +94,7 @@ function PostForm({ post }) {
                 </div>
             </div>
             <div className="w-full lg:w-1/3">
-                <div className="bg-white border border-stone-200/80 rounded-2xl p-5 space-y-5 sticky top-20 shadow-sm">
+                <div className="bg-white border border-stone-200/80 rounded-xl sm:rounded-2xl p-4 sm:p-5 space-y-5 lg:sticky lg:top-20 shadow-sm">
                     <p className="text-xs font-semibold text-stone-400 uppercase tracking-widest">Post Settings</p>
 
                     <Input
