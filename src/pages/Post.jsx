@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import dbService from "../appWrite/dbConfig";
-import { Button, Container } from "../components/Index"
+import { Button, Container, ConfirmModal } from "../components/Index";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 // Import DOMPurify for HTML sanitization
@@ -11,6 +11,9 @@ export default function Post() {
     const [post, setPost] = useState(null);
     const { slug } = useParams();
     const navigate = useNavigate();
+
+    const [showModel, setShowModel] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const userData = useSelector((state) => state.auth.userData);
 
@@ -26,12 +29,14 @@ export default function Post() {
     }, [slug, navigate]);
 
     const deletePost = () => {
+        setLoading(true)
         dbService.deletePost(post.$id).then((status) => {
             if (status) {
                 dbService.deleteFile(post.featuredImage);
+                setShowModel(false);
                 navigate("/");
             }
-        });
+        }).finally(() => setLoading(false));
     };
 
     return post ? (
@@ -70,12 +75,22 @@ export default function Post() {
                                         Edit
                                     </Button>
                                 </Link>
-                                <Button bgColor="bg-red-500 hover:bg-red-600 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm" onClick={deletePost}>
+                                <Button bgColor="bg-red-500 hover:bg-red-600 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm" onClick={() => setShowModel(true)}>
                                     <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>
                                     Delete
                                 </Button>
+                                <ConfirmModal
+                                    isOpen={showModel}
+                                    onClose={() => setShowModel(false)}
+                                    onConfirm={deletePost}
+                                    title="Are you sure you want to delete this post?"
+                                    message="This action cannot be Undone."
+                                    confirmText="Delete Post"
+                                    cancelText="Cancel"
+                                    loading={loading}
+                                />
                             </div>
                         )}
                     </div>
