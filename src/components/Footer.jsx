@@ -108,14 +108,9 @@ function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <a
-                                    href="#terms"
-                                    onClick={(e) => e.preventDefault()}
-                                    className={footerLink}
-                                    title="Coming soon"
-                                >
+                                <Link className={footerLink} to="/terms-and-conditions">
                                     Terms &amp; Conditions
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
