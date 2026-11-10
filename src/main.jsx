@@ -14,6 +14,7 @@ import AllPosts from './pages/AllPosts.jsx'
 import AddPost from './pages/AddPost.jsx'
 import EditPost from './pages/EditPost.jsx'
 import Post from './pages/Post.jsx'
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx'
 
 import {AuthLayout} from './components/Index.js'
 
@@ -67,6 +68,8 @@ const router = createBrowserRouter([
       },
 
       { path: "/post/:slug", element: <Post /> },
+
+      { path: "/privacy-policy", element: <PrivacyPolicy /> },
 
     ],
   },

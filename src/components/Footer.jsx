@@ -88,7 +88,7 @@ function Footer() {
                         </ul>
                     </div>
 
-                    {/* Legal & Support Column (Placeholder/Dead Links for now) */}
+                    {/* Legal & Support Column */}
                     <div className="col-span-6 md:col-span-3">
                         <h3 className="mb-3 sm:mb-4 text-xs font-bold uppercase tracking-widest text-stone-400">
                             Legal &amp; Support
@@ -96,23 +96,16 @@ function Footer() {
                         <ul className="space-y-2.5 sm:space-y-3">
                             <li>
                                 <a
-                                    href="#contact"
-                                    onClick={(e) => e.preventDefault()}
+                                    href="mailto:contact.tarundev@gmail.com"
                                     className={footerLink}
-                                    title="Coming soon"
                                 >
                                     Contact Us
                                 </a>
                             </li>
                             <li>
-                                <a
-                                    href="#privacy"
-                                    onClick={(e) => e.preventDefault()}
-                                    className={footerLink}
-                                    title="Coming soon"
-                                >
+                                <Link className={footerLink} to="/privacy-policy">
                                     Privacy Policy
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <a
